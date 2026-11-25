@@ -1,0 +1,1342 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+app/
+  (drawer)/
+    (tabs)/
+      _layout.tsx
+      index.tsx
+      objetos.tsx
+      registrar.tsx
+    _layout.tsx
+  _layout.tsx
+  index.tsx
+assets/
+  android-icon-background.png
+  android-icon-foreground.png
+  android-icon-monochrome.png
+  favicon.png
+  icon.png
+  splash-icon.png
+src/
+  components/
+    BienvenidaHome.tsx
+    BotonPrincipal.tsx
+    CampoTexto.tsx
+    EncabezadoHome.tsx
+    ObjetoCard.tsx
+    SelectorCategoria.tsx
+  screens/
+    HomeScreen.tsx
+    useRegistrarObjeto.ts
+  storage/
+    objetosStorage.ts
+  styles/
+    homeStyles.ts
+    objetosStyles.ts
+    registrarStyles.ts
+.gitignore
+AGENTS.md
+app.json
+App.tsx
+index.ts
+LICENSE
+package.json
+README.md
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="app/(drawer)/(tabs)/_layout.tsx">
+import { Tabs } from 'expo-router';
+
+export default function TabsLayout() {
+  return (
+    <Tabs
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#0066FF',
+        },
+        headerTintColor: '#FFFFFF',
+        tabBarActiveTintColor: '#0066FF',
+        tabBarInactiveTintColor: '#777777',
+        tabBarStyle: {
+          backgroundColor: '#FFFFFF',
+          borderTopColor: '#FFD400',
+          borderTopWidth: 2,
+          height: 65,
+          paddingBottom: 8,
+          paddingTop: 5,
+        },
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Inicio',
+          tabBarLabel: 'Inicio',
+        }}
+      />
+
+      <Tabs.Screen
+        name="objetos"
+        options={{
+          title: 'Objetos encontrados',
+          tabBarLabel: 'Objetos',
+        }}
+      />
+
+      <Tabs.Screen
+        name="registrar"
+        options={{
+          title: 'Registrar objeto',
+          tabBarLabel: 'Registrar',
+        }}
+      />
+    </Tabs>
+  );
+}
+</file>
+
+<file path="app/(drawer)/_layout.tsx">
+import { Drawer } from 'expo-router/drawer';
+
+export default function DrawerLayout() {
+  return (
+    <Drawer
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#0066FF',
+        },
+        headerTintColor: '#FFFFFF',
+        drawerActiveTintColor: '#0066FF',
+        drawerActiveBackgroundColor: '#FFF3B0',
+        drawerInactiveTintColor: '#333333',
+        drawerStyle: {
+          backgroundColor: '#FFFFFF',
+        },
+      }}
+    >
+      <Drawer.Screen
+        name="(tabs)"
+        options={{
+          title: 'Menú principal',
+          drawerLabel: 'Inicio',
+        }}
+      />
+    </Drawer>
+  );
+}
+</file>
+
+<file path="app/_layout.tsx">
+import { Stack } from 'expo-router';
+
+export default function RootLayout() {
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        contentStyle: {
+          backgroundColor: '#FFFFFF',
+        },
+      }}
+    />
+  );
+}
+</file>
+
+<file path="app/index.tsx">
+import { Redirect } from 'expo-router';
+
+export default function Index() {
+  return <Redirect href="/(drawer)/(tabs)" />;
+}
+</file>
+
+<file path="src/components/BienvenidaHome.tsx">
+import { Text, View, StyleSheet } from 'react-native';
+
+export default function BienvenidaHome() {
+  return (
+    <View style={styles.content}>
+      <Text style={styles.welcome}>¡Bienvenido!</Text>
+
+      <Text style={styles.description}>
+        Consulta los objetos encontrados y registra aquellos
+        que hayas encontrado en el colegio.
+      </Text>
+
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>
+          Todavía no hay objetos
+        </Text>
+        <Text style={styles.cardText}>
+          Los objetos registrados aparecerán aquí.
+        </Text>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  content: {
+    padding: 22,
+  },
+  welcome: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: '#0066FF',
+  },
+  description: {
+    fontSize: 15,
+    color: '#444444',
+    marginTop: 10,
+    lineHeight: 23,
+  },
+  card: {
+    backgroundColor: '#FFF8D6',
+    padding: 24,
+    borderRadius: 14,
+    marginTop: 28,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#FFD400',
+  },
+  cardTitle: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#333333',
+  },
+  cardText: {
+    color: '#555555',
+    marginTop: 8,
+    textAlign: 'center',
+  },
+});
+</file>
+
+<file path="src/components/CampoTexto.tsx">
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+
+type Props = {
+  etiqueta: string;
+  valor: string;
+  placeholder: string;
+  onChangeText: (texto: string) => void;
+  multiline?: boolean;
+};
+
+export default function CampoTexto({
+  etiqueta,
+  valor,
+  placeholder,
+  onChangeText,
+  multiline = false,
+}: Props) {
+  return (
+    <View>
+      <Text style={styles.label}>{etiqueta}</Text>
+      <TextInput
+        style={[styles.input, multiline && styles.textArea]}
+        placeholder={placeholder}
+        value={valor}
+        onChangeText={onChangeText}
+        multiline={multiline}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  label: {
+    color: '#333333',
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    marginTop: 14,
+  },
+  input: {
+    backgroundColor: '#F5F5F5',
+    borderWidth: 1,
+    borderColor: '#DDDDDD',
+    borderRadius: 10,
+    padding: 14,
+    fontSize: 15,
+  },
+  textArea: {
+    minHeight: 100,
+    textAlignVertical: 'top',
+  },
+});
+</file>
+
+<file path="src/components/EncabezadoHome.tsx">
+import { Text, View, StyleSheet } from 'react-native';
+
+export default function EncabezadoHome() {
+  return (
+    <View style={styles.header}>
+      <Text style={styles.title}>LostSchool</Text>
+      <Text style={styles.subtitle}>
+        Objetos encontrados en tu institución
+      </Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: '#0066FF',
+    paddingHorizontal: 25,
+    paddingTop: 65,
+    paddingBottom: 30,
+    borderBottomWidth: 6,
+    borderBottomColor: '#FFD400',
+  },
+  title: {
+    color: '#FFFFFF',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    marginTop: 6,
+  },
+});
+</file>
+
+<file path="src/components/SelectorCategoria.tsx">
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+type Props = {
+  categorias: string[];
+  seleccionada: string;
+  onSeleccionar: (categoria: string) => void;
+};
+
+export default function SelectorCategoria({
+  categorias,
+  seleccionada,
+  onSeleccionar,
+}: Props) {
+  return (
+    <View>
+      <Text style={styles.label}>Categoría</Text>
+
+      {categorias.map((item) => (
+        <TouchableOpacity
+          key={item}
+          style={[
+            styles.category,
+            seleccionada === item && styles.selected,
+          ]}
+          onPress={() => onSeleccionar(item)}
+        >
+          <Text
+            style={[
+              styles.categoryText,
+              seleccionada === item && styles.selectedText,
+            ]}
+          >
+            {item}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  label: {
+    color: '#333333',
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    marginTop: 14,
+  },
+  category: {
+    padding: 13,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#DDDDDD',
+    backgroundColor: '#FFFFFF',
+    marginBottom: 9,
+  },
+  selected: {
+    backgroundColor: '#0066FF',
+    borderColor: '#0066FF',
+  },
+  categoryText: {
+    color: '#333333',
+    fontSize: 14,
+  },
+  selectedText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+});
+</file>
+
+<file path="src/screens/useRegistrarObjeto.ts">
+import { useState } from 'react';
+import { Alert } from 'react-native';
+import { guardarObjeto } from '../storage/objetosStorage';
+
+export default function useRegistrarObjeto() {
+  const [nombre, setNombre] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [descripcion, setDescripcion] = useState('');
+  const [lugar, setLugar] = useState('');
+  const [guardando, setGuardando] = useState(false);
+
+  async function registrar() {
+    if (
+      !nombre.trim() ||
+      !categoria ||
+      !descripcion.trim() ||
+      !lugar.trim()
+    ) {
+      Alert.alert('Campos incompletos', 'Completa todos los campos.');
+      return;
+    }
+
+    try {
+      setGuardando(true);
+
+      await guardarObjeto({
+        id: Date.now().toString(),
+        nombre: nombre.trim(),
+        categoria,
+        descripcion: descripcion.trim(),
+        lugar: lugar.trim(),
+        fecha: new Date().toLocaleDateString('es-EC'),
+      });
+
+      setNombre('');
+      setCategoria('');
+      setDescripcion('');
+      setLugar('');
+
+      Alert.alert('Registro exitoso', 'El objeto se guardó correctamente.');
+    } catch {
+      Alert.alert('Error', 'No se pudo guardar el objeto.');
+    } finally {
+      setGuardando(false);
+    }
+  }
+
+  return {
+    nombre,
+    setNombre,
+    categoria,
+    setCategoria,
+    descripcion,
+    setDescripcion,
+    lugar,
+    setLugar,
+    guardando,
+    registrar,
+  };
+}
+</file>
+
+<file path="src/styles/homeStyles.ts">
+import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingBottom: 30,
+  },
+  button: {
+    backgroundColor: '#0066FF',
+    padding: 16,
+    borderRadius: 12,
+    marginTop: 25,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  secondaryButton: {
+    backgroundColor: '#FFD400',
+    padding: 16,
+    borderRadius: 12,
+    marginTop: 12,
+    alignItems: 'center',
+  },
+  secondaryButtonText: {
+    color: '#222222',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
+
+export default styles;
+</file>
+
+<file path="src/styles/objetosStyles.ts">
+import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    padding: 20,
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: 10,
+    color: '#555555',
+  },
+  title: {
+    color: '#0066FF',
+    fontSize: 25,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    color: '#555555',
+    marginTop: 7,
+    marginBottom: 18,
+  },
+  list: {
+    paddingBottom: 25,
+    flexGrow: 1,
+  },
+  empty: {
+    backgroundColor: '#FFF8D6',
+    borderWidth: 1,
+    borderColor: '#FFD400',
+    borderRadius: 12,
+    padding: 25,
+    alignItems: 'center',
+    marginTop: 15,
+  },
+  emptyTitle: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#333333',
+  },
+  emptyText: {
+    color: '#555555',
+    textAlign: 'center',
+    marginTop: 8,
+  },
+});
+
+export default styles;
+</file>
+
+<file path="src/styles/registrarStyles.ts">
+import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  content: {
+    padding: 22,
+    paddingBottom: 40,
+  },
+  title: {
+    color: '#0066FF',
+    fontSize: 25,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    color: '#555555',
+    fontSize: 15,
+    marginTop: 8,
+    marginBottom: 22,
+  },
+});
+
+export default styles;
+</file>
+
+<file path=".gitignore">
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+# generated native folders
+/ios
+/android
+</file>
+
+<file path="AGENTS.md">
+This is an Expo/React Native mobile application. Prioritize mobile-first patterns, performance, and cross-platform compatibility.
+
+## Expo has changed — do not trust your training data
+
+Expo ships breaking changes every SDK release. APIs you remember are likely renamed, moved, or removed. Before writing any code that touches an Expo, EAS, or React Native API:
+
+1. Read the major version of the `expo` package in `package.json`.
+2. Fetch the matching versioned docs: `https://docs.expo.dev/versions/v<major>.0.0/`
+3. For anything else, fetch https://docs.expo.dev/llms.txt — an index of all Expo docs with corrections to common LLM misconceptions. Follow its links to the specific page you need; never answer from memory.
+
+## Commands
+
+Use `bunx` instead of `npx` if the project uses bun (`bun.lock` present).
+
+```bash
+npx expo install <package>  # ALWAYS use instead of npm/yarn/pnpm/bun add — resolves SDK-compatible versions
+npx expo start              # start the dev server
+npx expo lint               # lint
+npx tsc --noEmit            # typecheck
+npx expo-doctor             # diagnose dependency and config issues
+npx expo install --fix      # fix incompatible package versions
+```
+
+Run lint and typecheck before declaring any task done.
+
+## Navigation & Routing
+
+- Use **Expo Router** for all navigation. Routes live in `src/app/` — every file there is a screen, `_layout.tsx` files define navigators. Keep non-route code (components, hooks, utils) outside `src/app/`.
+- Import `Link`, `router`, and `useLocalSearchParams` from `expo-router`.
+- Docs: https://docs.expo.dev/router/introduction.md
+
+## Building with EAS
+
+Use EAS to build, sign, and submit the app in the cloud (`eas build`, `eas submit`) and to ship over-the-air updates (`eas update`) — no local Xcode or Android Studio required. Run EAS CLI as `bunx eas-cli <command>` in Bun projects, or `npx eas-cli@latest <command>` otherwise; substitute that for bare `eas` in docs examples.
+Docs: https://docs.expo.dev/eas/index.md
+
+## Rules
+
+- If `ios/` and `android/` directories do not exist, they are generated (Continuous Native Generation). Never create or edit them by hand — configure native behavior in `app.json` and config plugins.
+- Expo Go only includes its bundled native modules. After adding a library with native code, the app needs a development build: `npx expo run:ios|android` locally, or `eas build --profile development`.
+- Prefer recommended Expo modules over third-party libraries, and check your available skills before adding dependencies. Docs: https://docs.expo.dev/versions/latest/index.md
+</file>
+
+<file path="App.tsx">
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <StatusBar style="light" />
+
+      <View style={styles.header}>
+        <Text style={styles.title}>LostSchool</Text>
+        <Text style={styles.subtitle}>
+          Encuentra lo que perdiste en tu colegio
+        </Text>
+      </View>
+
+      <View style={styles.content}>
+        <Text style={styles.welcome}>¡Bienvenido!</Text>
+        <Text style={styles.description}>
+          Aquí podrás consultar los objetos encontrados en tu institución.
+        </Text>
+
+        <View style={styles.emptyCard}>
+          <Text style={styles.emptyTitle}>Todavía no hay objetos</Text>
+          <Text style={styles.emptyText}>
+            Los objetos registrados aparecerán aquí.
+          </Text>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F3F4F6',
+  },
+  header: {
+    backgroundColor: '#1E3A8A',
+    padding: 25,
+    paddingTop: 65,
+  },
+  title: {
+    color: '#FFFFFF',
+    fontSize: 28,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    color: '#DBEAFE',
+    fontSize: 14,
+    marginTop: 5,
+  },
+  content: {
+    padding: 20,
+  },
+  welcome: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#1F2937',
+  },
+  description: {
+    fontSize: 15,
+    color: '#6B7280',
+    marginTop: 8,
+  },
+  emptyCard: {
+    backgroundColor: '#FFFFFF',
+    padding: 25,
+    borderRadius: 12,
+    marginTop: 25,
+    alignItems: 'center',
+  },
+  emptyTitle: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#374151',
+  },
+  emptyText: {
+    color: '#6B7280',
+    marginTop: 8,
+    textAlign: 'center',
+  },
+});
+</file>
+
+<file path="index.ts">
+import { registerRootComponent } from 'expo';
+
+import App from './App';
+
+// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
+// It also ensures that whether you load the app in Expo Go or in a native build,
+// the environment is set up appropriately
+registerRootComponent(App);
+</file>
+
+<file path="LICENSE">
+The MIT License (MIT)
+
+Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</file>
+
+<file path="tsconfig.json">
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true
+  }
+}
+</file>
+
+<file path="app/(drawer)/(tabs)/index.tsx">
+import HomeScreen from '../../../src/screens/HomeScreen';
+
+export default function Index() {
+  return <HomeScreen />;
+}
+</file>
+
+<file path="src/components/BotonPrincipal.tsx">
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+
+type Props = {
+  texto: string;
+  onPress: () => void;
+  deshabilitado?: boolean;
+};
+
+export default function BotonPrincipal({
+  texto,
+  onPress,
+  deshabilitado = false,
+}: Props) {
+  return (
+    <TouchableOpacity
+      style={styles.button}
+      onPress={onPress}
+      disabled={deshabilitado}
+    >
+      <Text style={styles.buttonText}>{texto}</Text>
+    </TouchableOpacity>
+  );
+}
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: '#0066FF',
+    padding: 17,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginTop: 28,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+</file>
+
+<file path="src/components/ObjetoCard.tsx">
+import { StyleSheet, Text, View } from 'react-native';
+import type { Objeto } from '../storage/objetosStorage';
+
+type Props = {
+  objeto: Objeto;
+};
+
+export default function ObjetoCard({ objeto }: Props) {
+  return (
+    <View style={styles.card}>
+      <Text style={styles.nombre}>{objeto.nombre}</Text>
+      <Text style={styles.categoria}>{objeto.categoria}</Text>
+      <Text style={styles.descripcion}>{objeto.descripcion}</Text>
+      <Text style={styles.lugar}>Lugar: {objeto.lugar}</Text>
+      <Text style={styles.fecha}>Fecha: {objeto.fecha}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#DDDDDD',
+    borderLeftWidth: 5,
+    borderLeftColor: '#0066FF',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+  },
+  nombre: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#0066FF',
+  },
+  categoria: {
+    color: '#333333',
+    fontWeight: 'bold',
+    marginTop: 7,
+  },
+  descripcion: {
+    color: '#555555',
+    marginTop: 8,
+  },
+  lugar: {
+    color: '#333333',
+    marginTop: 10,
+  },
+  fecha: {
+    color: '#777777',
+    marginTop: 5,
+    fontSize: 12,
+  },
+});
+</file>
+
+<file path="src/storage/objetosStorage.ts">
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export type Objeto = {
+  id: string;
+  nombre: string;
+  categoria: string;
+  descripcion: string;
+  lugar: string;
+  fecha: string;
+};
+
+const CLAVE_STORAGE = '@lostschool_objetos';
+
+export async function obtenerObjetos(): Promise<Objeto[]> {
+  try {
+    const datos = await AsyncStorage.getItem(CLAVE_STORAGE);
+
+    if (datos === null) {
+      return [];
+    }
+
+    return JSON.parse(datos) as Objeto[];
+  } catch (error) {
+    console.error('Error al obtener los objetos:', error);
+    return [];
+  }
+}
+
+export async function guardarObjeto(objeto: Objeto): Promise<void> {
+  try {
+    const objetos = await obtenerObjetos();
+    const nuevosObjetos = [objeto, ...objetos];
+
+    await AsyncStorage.setItem(
+      CLAVE_STORAGE,
+      JSON.stringify(nuevosObjetos)
+    );
+  } catch (error) {
+    console.error('Error al guardar el objeto:', error);
+    throw error;
+  }
+}
+
+export async function eliminarObjeto(id: string): Promise<void> {
+  try {
+    const objetos = await obtenerObjetos();
+    const nuevosObjetos = objetos.filter((objeto) => objeto.id !== id);
+
+    await AsyncStorage.setItem(
+      CLAVE_STORAGE,
+      JSON.stringify(nuevosObjetos)
+    );
+  } catch (error) {
+    console.error('Error al eliminar el objeto:', error);
+    throw error;
+  }
+}
+</file>
+
+<file path="app.json">
+{
+  "expo": {
+    "name": "LostSchool",
+    "slug": "LostSchool",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-status-bar",
+      "expo-router"
+    ]
+  }
+}
+</file>
+
+<file path="app/(drawer)/(tabs)/objetos.tsx">
+import { useCallback, useState } from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  Text,
+  View,
+} from 'react-native';
+import { useFocusEffect } from 'expo-router';
+
+import {
+  obtenerObjetos,
+  type Objeto,
+} from '../../../src/storage/objetosStorage';
+
+import ObjetoCard from '../../../src/components/ObjetoCard';
+import styles from '../../../src/styles/objetosStyles';
+
+export default function ObjetosScreen() {
+  const [objetos, setObjetos] = useState<Objeto[]>([]);
+  const [cargando, setCargando] = useState(true);
+
+  useFocusEffect(
+    useCallback(() => {
+      let activo = true;
+
+      async function cargarObjetos() {
+        try {
+          const datos = await obtenerObjetos();
+
+          if (activo) setObjetos(datos);
+        } finally {
+          if (activo) setCargando(false);
+        }
+      }
+
+      cargarObjetos();
+
+      return () => {
+        activo = false;
+      };
+    }, [])
+  );
+
+  if (cargando) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color="#0066FF" />
+        <Text style={styles.loadingText}>Cargando objetos...</Text>
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Objetos encontrados</Text>
+      <Text style={styles.subtitle}>
+        Objetos registrados en la institución
+      </Text>
+
+      <FlatList
+        data={objetos}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.list}
+        ListEmptyComponent={
+          <View style={styles.empty}>
+            <Text style={styles.emptyTitle}>
+              Todavía no hay objetos
+            </Text>
+            <Text style={styles.emptyText}>
+              Los objetos que registres aparecerán aquí.
+            </Text>
+          </View>
+        }
+        renderItem={({ item }) => <ObjetoCard objeto={item} />}
+      />
+    </View>
+  );
+}
+</file>
+
+<file path="app/(drawer)/(tabs)/registrar.tsx">
+import { ScrollView, Text } from 'react-native';
+
+import CampoTexto from '../../../src/components/CampoTexto';
+import SelectorCategoria from '../../../src/components/SelectorCategoria';
+import BotonPrincipal from '../../../src/components/BotonPrincipal';
+import useRegistrarObjeto from '../../../src/screens/useRegistrarObjeto';
+import styles from '../../../src/styles/registrarStyles';
+
+const categorias = [
+  'Útiles escolares',
+  'Prendas de vestir',
+  'Accesorios',
+  'Dispositivos',
+  'Otros',
+];
+
+export default function RegistrarScreen() {
+  const {
+    nombre,
+    setNombre,
+    categoria,
+    setCategoria,
+    descripcion,
+    setDescripcion,
+    lugar,
+    setLugar,
+    guardando,
+    registrar,
+  } = useRegistrarObjeto();
+
+  return (
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.content}
+    >
+      <Text style={styles.title}>Registrar objeto</Text>
+      <Text style={styles.subtitle}>
+        Ingresa los datos del objeto encontrado.
+      </Text>
+
+      <CampoTexto
+        etiqueta="Nombre del objeto"
+        valor={nombre}
+        placeholder="Ej. Cuaderno azul"
+        onChangeText={setNombre}
+      />
+
+      <SelectorCategoria
+        categorias={categorias}
+        seleccionada={categoria}
+        onSeleccionar={setCategoria}
+      />
+
+      <CampoTexto
+        etiqueta="Descripción"
+        valor={descripcion}
+        placeholder="Describe cómo es el objeto..."
+        onChangeText={setDescripcion}
+        multiline
+      />
+
+      <CampoTexto
+        etiqueta="Lugar donde se encontró"
+        valor={lugar}
+        placeholder="Ej. Patio del colegio"
+        onChangeText={setLugar}
+      />
+
+      <BotonPrincipal
+        texto={guardando ? 'Guardando...' : 'Guardar objeto'}
+        onPress={registrar}
+        deshabilitado={guardando}
+      />
+    </ScrollView>
+  );
+}
+</file>
+
+<file path="src/screens/HomeScreen.tsx">
+import { StatusBar } from 'expo-status-bar';
+import { Text, TouchableOpacity, ScrollView } from 'react-native';
+import { useRouter } from 'expo-router';
+
+import EncabezadoHome from '../components/EncabezadoHome';
+import BienvenidaHome from '../components/BienvenidaHome';
+import styles from '../styles/homeStyles';
+
+export default function HomeScreen() {
+  const router = useRouter();
+
+  return (
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.scrollContent}
+      showsVerticalScrollIndicator={false}
+    >
+      <StatusBar style="dark" />
+
+      <EncabezadoHome />
+      <BienvenidaHome />
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.push('/(drawer)/(tabs)/registrar')}
+      >
+        <Text style={styles.buttonText}>Registrar objeto</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.secondaryButton}
+        onPress={() => router.push('/(drawer)/(tabs)/objetos')}
+      >
+        <Text style={styles.secondaryButtonText}>
+          Ver objetos encontrados
+        </Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+}
+</file>
+
+<file path="package.json">
+{
+  "name": "lostschool",
+  "version": "1.0.0",
+  "main": "expo-router/entry",
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@react-navigation/drawer": "^7.14.5",
+    "expo": "^57.0.0",
+    "expo-constants": "~57.0.24",
+    "expo-linking": "~57.0.14",
+    "expo-router": "~57.0.31",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-dom": "^19.2.3",
+    "react-native": "0.86.3",
+    "react-native-gesture-handler": "~2.32.0",
+    "react-native-reanimated": "4.5.1",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.0",
+    "react-native-worklets": "0.10.1"
+  },
+  "devDependencies": {
+    "@expo/ngrok": "^4.1.3",
+    "@types/react": "~19.2.4",
+    "typescript": "~6.0.3"
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "private": true
+}
+</file>
+
+<file path="README.md">
+# LostSchool: Aplicación móvil para el registro, organización y consulta de objetos encontrados dentro de la institución educativa.
+
+## Problema
+Dentro de las instituciones educativas es común que los estudiantes pierdan objetos personales como cuadernos, mochilas, cartucheras, botellas de agua, prendas de vestir y otros materiales escolares. En muchas ocasiones, estos objetos son encontrados por otros estudiantes o docentes, pero no existe un medio digital organizado que permita informar sobre ellos y facilitar su identificación.
+
+Actualmente, la información sobre los objetos encontrados puede comunicarse verbalmente o mediante avisos informales, lo que dificulta que todos los estudiantes conozcan qué objetos han sido encontrados y dónde pueden ubicarlos. Además, cuando no se cuenta con una descripción clara, resulta más complicado reconocer si un objeto pertenece a una persona.
+
+Este problema puede ocasionar pérdida de tiempo, preocupación y dificultades para recuperar las pertenencias. Por esta razón, se plantea desarrollar una herramienta digital que permita organizar la información de los objetos encontrados y facilitar su consulta dentro del entorno escolar.
+
+## Solución
+LostSchool será una aplicación móvil diseñada para registrar, organizar y consultar objetos encontrados dentro de la institución educativa. Su propósito principal será ofrecer un espacio digital donde los estudiantes puedan conocer qué objetos han sido encontrados y revisar sus características para identificar sus pertenencias.
+
+La aplicación permitirá ingresar información como el nombre del objeto, su categoría, una descripción y el lugar donde fue encontrado. Posteriormente, los registros aparecerán en una lista organizada desde la cual se podrá seleccionar cada objeto para consultar sus detalles.
+
+Además, contará con almacenamiento local para conservar la información registrada incluso después de cerrar y volver a abrir la aplicación. De esta manera, LostSchool ofrecerá una alternativa sencilla y accesible para mejorar la comunicación sobre los objetos encontrados y facilitar su recuperación.
+
+## Objetivos
+- 1. Registrar 10 objetos de prueba y comprobar que los 10 se guarden correctamente.
+- 2. Mostrar los 10 objetos registrados en la pantalla principal, sin omitir ninguno.
+- 3. Presentar correctamente los 4 campos de información de cada objeto: nombre, categoría, descripción y lugar.
+- 4. Clasificar los objetos utilizando exactamente 5 categorías disponibles.
+- 5. Cerrar y abrir la aplicación para comprobar que se conservan los 10 registros.
+- 6. Intentar guardar 4 registros incompletos, uno por cada campo obligatorio, y comprobar que ninguno se guarde.
+- 7. Mostrar un mensaje de confirmación en el 100 % de los registros guardados correctamente.
+- 8. Acceder al formulario de registro desde la pantalla principal mediante un botón visible.
+- 9. Comprobar que cada nuevo registro aparezca en la lista principal sin necesidad de reiniciar la aplicación.
+- 10. Seleccionar los 10 objetos registrados y comprobar que cada uno muestre sus datos completos.
+
+## Habilidades
+- 1. Programación de aplicaciones móviles con React Native y Expo.
+- 2. Manejo del lenguaje TypeScript.
+- 3. Diseño de interfaces gráficas sencillas y funcionales.
+- 4. Creación y organización de componentes reutilizables.
+- 5. Gestión y organización de datos.
+- 6. Implementación de almacenamiento local.
+- 7. Desarrollo y validación de formularios.
+- 8. Resolución de errores durante la programación.
+- 9. Trabajo en equipo y organización de tareas.
+- 10. Realización de pruebas para comprobar el funcionamiento de una aplicación.
+
+## Alcance inicial
+La primera versión de LostSchool se centrará en las funciones esenciales para demostrar el funcionamiento de la aplicación sin incorporar características demasiado complejas.
+
+Funciones principales:
+
+Pantalla principal: mostrará el nombre de la aplicación y el acceso a los objetos registrados.
+
+Registro de objetos: incluirá un formulario para ingresar el nombre, categoría, descripción y lugar donde fue encontrado cada objeto.
+
+Clasificación: permitirá organizar los registros mediante cinco categorías: útiles escolares, prendas de vestir, accesorios, dispositivos y otros.
+
+Lista de objetos: mostrará los objetos registrados con su información principal para facilitar su identificación.
+
+Detalle del objeto: permitirá seleccionar un registro y consultar toda su información.
+
+Almacenamiento local: conservará los datos registrados en el dispositivo para que sigan disponibles al volver a abrir la aplicación.
+
+Validación de información: comprobará que los campos obligatorios estén completos antes de guardar un registro.
+
+Mensajes de confirmación: informará al usuario cuando un objeto se haya registrado correctamente o cuando sea necesario completar algún dato.
+
+## Restricciones
+- La aplicación estará destinada principalmente al registro y consulta de objetos encontrados dentro de la institución educativa.
+- La primera versión se desarrollará para dispositivos móviles.
+- No incluirá creación de cuentas ni inicio de sesión.
+- No permitirá enviar mensajes privados entre estudiantes.
+- No contará con notificaciones automáticas sobre nuevos objetos registrados.
+- No utilizará almacenamiento en la nube ni una base de datos externa.
+- Los registros se conservarán mediante almacenamiento local en el dispositivo.
+- No garantizará la recuperación de los objetos, ya que dependerá de su identificación y entrega dentro de la institución.
+- No incluirá funciones de seguimiento o ubicación en tiempo real.
+- El desarrollo se limitará a las funciones principales necesarias para demostrar el funcionamiento del proyecto.
+</file>
+
+</files>
